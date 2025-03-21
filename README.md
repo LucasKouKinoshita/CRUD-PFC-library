@@ -15,6 +15,6 @@ Membros e funções:
 
 Stack:
 - Front-end
-  - Angular
+  - Angular v19
 - Back-end
   - Firebase 
