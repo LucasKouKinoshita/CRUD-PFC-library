@@ -8,10 +8,10 @@ Features:
       - Por meio do orientador
    
 Membros e funções: 
-- Lucas Werlang 
-- Lucas Kou Kinoshita
-- Pollyanny Junia Brandao
-- (possível membro)Filipe Ribeiro
+- Lucas Werlang - Full stack
+- Lucas Kou Kinoshita - Full stack
+- Pollyanny Junia Brandao - Full stack
+- (possível membro)Filipe Ribeiro - Full stack
 
 Stack:
 - Front-end
