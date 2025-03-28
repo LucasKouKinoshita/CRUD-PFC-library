@@ -13,7 +13,7 @@ Features:
       - Ano
       - Professor orientador
       - Autor
-  - Os usuário devem por visualizar e baixar os trabalhos de interesse
+  - Os usuário devem poder visualizar e baixar os trabalhos de interesse
   - Interface amigável com design a ser decidido (netflix, steam etc etc..)
    
 Membros e funções: 
