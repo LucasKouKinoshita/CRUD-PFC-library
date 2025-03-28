@@ -4,7 +4,7 @@ Features:
     - Log(in/out), sign up, reset password, change password
   - Perfil básico do usuário
     - Página com nome completo e TCC (caso publicado)
-  - Os usuários devem ser capazes de postar o próprio trabalho
+  - Os usuários devem ser capazes de postar e deletar o próprio trabalho
     - Limite de um trabalho por usuário
     - O post deve conter o título do trabalho, curso, ano de publicação, nome do orientador e autor
   - Os usuário devem ser capazes de pesquisar por trabalhos por meio do
