@@ -7,7 +7,7 @@ Features:
   - Os usuários devem ser capazes de postar o próprio trabalho
     - Limite de um trabalho por usuário
     - O post deve conter o título do trabalho, curso, ano de publicação, nome do orientador e autor
-  - Os usuário devem ser capazes de pesquisar pro trabalhos por meio do
+  - Os usuário devem ser capazes de pesquisar por trabalhos por meio do
       - Título
       - Curso
       - Ano
