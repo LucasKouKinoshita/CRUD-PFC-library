@@ -5,7 +5,7 @@ import {
   updateProfile,
   user,
 } from '@angular/fire/auth';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { from, Observable } from 'rxjs';
 import { UserInterface } from '../@interfaces/user.interface';
 
@@ -40,7 +40,24 @@ export class AuthService {
       this.firebaseAuth,
       email,
       password
-    ).then(() => {})
+    ).then(() => {
+      const currentUser = this.firebaseAuth.currentUser;
+
+      if (currentUser) {
+        // Set the currentUserSig signal with email and displayName
+        this.currentUserSig.set({
+          email: currentUser.email || '',
+          username: currentUser.displayName || '',
+        });
+      }
+    });
+
     return from(promise);
+  }
+
+  logout(): Observable<void> {
+    const promise = signOut(this.firebaseAuth)
+    this.currentUserSig.set(null);
+    return from(promise)
   }
 }
