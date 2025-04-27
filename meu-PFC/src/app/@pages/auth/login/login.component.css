@@ -1,0 +1,11 @@
+.card {
+    width: 20%;
+    background: rgba(0, 0, 0, 0.7);;
+    border: 1px;
+    padding-top: 1.25rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 1.25rem;
+    border-radius: 4px;
+    margin-top: 10rem;
+}
