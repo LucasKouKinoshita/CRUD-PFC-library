@@ -2,6 +2,10 @@
   <div class="flex flex-column gap-4 card">
     <p class="text-xl">Register</p>
 
+    @if (errorMessage) {
+        <div> {{errorMessage}}</div>
+    }
+
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="flex flex-column gap-4">
         <div class="flex flex-column gap-2">

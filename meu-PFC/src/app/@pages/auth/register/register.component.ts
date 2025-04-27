@@ -4,6 +4,7 @@ import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms'; 
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../@services/auth.service';
+import e from 'express';
 
 @Component({
   selector: 'app-register',
@@ -31,7 +32,6 @@ export class RegisterComponent {
   errorMessage: string | null = null;
 
   onSubmit(): void {
-    console.log('submite')
     if (this.form.valid) {
       const rawForm = this.form.getRawValue();
       this.authService.register(rawForm.email, rawForm.username, rawForm.password).subscribe({
