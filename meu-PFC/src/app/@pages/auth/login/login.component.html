@@ -1,34 +1,31 @@
+<div class="flex flex-column align-items-center">
+  <div class="flex flex-column gap-4 card">
+    <p class="text-xl">Enter</p>
 
-<div class = "flex flex-column align-items-center">
-    <div class="flex flex-column gap-4 card">
-        <p class="text-xl">
-            Enter
-        </p>
-    
-      <div class="flex flex-column gap-2">
-        <label for="username">Username</label>
-        <input pInputText id="username" type="text" />
-      </div>
-      <div class="flex flex-column gap-2">
-        <label for="password">Password</label>
-        <input pInputText id="password" type="password" />
-      </div>
-      <div class="flex flex-column gap-1">
-        <p-button
-          label="Login"
-          icon="pi pi-user"
-          class="w-full max-w-[17.35rem]"
-          styleClass="w-full mx-auto"
-        />
-    
-        <p-button
-          label="Sign Up"
-          icon="pi pi-user-plus"
-          severity="success"
-          class="w-full max-w-[17.35rem]"
-          styleClass="w-full mx-auto"
-        />
-      </div>
+    <div class="flex flex-column gap-2">
+      <label for="username">Username</label>
+      <input pInputText id="username" type="text" />
     </div>
+    <div class="flex flex-column gap-2">
+      <label for="password">Password</label>
+      <input pInputText id="password" type="password" />
+    </div>
+    <div class="flex flex-column gap-1">
+      <p-button
+        label="Login"
+        icon="pi pi-user"
+        class="w-full max-w-[17.35rem]"
+        styleClass="w-full mx-auto"
+      />
 
+      <p-button
+        label="Sign Up"
+        icon="pi pi-user-plus"
+        severity="success"
+        class="w-full max-w-[17.35rem]"
+        styleClass="w-full mx-auto"
+        [routerLink]="'/register'"
+      />
+    </div>
+  </div>
 </div>

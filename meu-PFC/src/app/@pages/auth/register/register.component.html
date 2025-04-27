@@ -1,1 +1,52 @@
-<p>register works!</p>
+<div class="flex flex-column align-items-center">
+  <div class="flex flex-column gap-4 card">
+    <p class="text-xl">Register</p>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="flex flex-column gap-4">
+        <div class="flex flex-column gap-2">
+          <label for="username">Username</label>
+          <input
+            pInputText
+            id="username"
+            type="text"
+            formControlName="username"
+          />
+        </div>
+
+        <div class="flex flex-column gap-2">
+          <label for="email">E-mail</label>
+          <input pInputText id="email" type="email" formControlName="email" />
+        </div>
+
+        <div class="flex flex-column gap-2">
+          <label for="password">Password</label>
+          <input
+            pInputText
+            id="password"
+            type="password"
+            formControlName="password"
+          />
+        </div>
+
+        <div class="flex flex-column gap-1">
+          <p-button
+            label="Register"
+            icon="pi pi-user-plus"
+            severity="success"
+            class="w-full max-w-[17.35rem]"
+            styleClass="w-full mx-auto"
+            (onClick)="onSubmit()"
+          />
+          <p-button
+            label="Back to Login"
+            icon="pi pi-user-plus"
+            class="w-full max-w-[17.35rem]"
+            styleClass="w-full mx-auto"
+            [routerLink]="'/login'"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
