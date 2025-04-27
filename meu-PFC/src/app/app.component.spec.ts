@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'meu-pfc' title`, () => {
+  it(`should have the 'meu-PFC' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('meu-pfc');
+    expect(app.title).toEqual('meu-PFC');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, meu-pfc');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, meu-PFC');
   });
 });
