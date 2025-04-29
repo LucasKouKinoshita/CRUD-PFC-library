@@ -6,9 +6,10 @@ import { PfcUploaderComponent } from '../pfc-uploader/pfc-uploader.component';
 
 @Component({
   selector: 'app-top-bar',
-  imports: [ButtonModule, PfcUploaderComponent],
+  standalone: true,
+  imports: [ButtonModule, PfcUploaderComponent, RouterModule],
   templateUrl: './top-bar.component.html',
-  styleUrl: './top-bar.component.css'
+  styleUrls: ['./top-bar.component.css'], // <-- Fix here too
 })
 export class TopBarComponent {
   authService = inject(AuthService);

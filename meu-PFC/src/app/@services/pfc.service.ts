@@ -1,43 +1,46 @@
-import { inject, Injectable } from '@angular/core';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
-import { Storage, ref, uploadString, getDownloadURL } from '@angular/fire/storage';
+import { Injectable } from '@angular/core';
+import { AuthService } from './auth.service';
+import { addDoc, collection, Firestore } from '@angular/fire/firestore';
 
 export interface Pfc {
   email: string;
-  titulo: string;
-  orientador: string;
-  fileUrl: string;
+  title: string;
+  orientator: string;
+  content: string;
 }
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PfcService {
-  firestore = inject(Firestore);
-  storage = inject(Storage)
+  email: string | undefined;
 
-  constructor() { }
+  constructor(
+    private readonly authService: AuthService,
+    private readonly firestore: Firestore
+  ) {
+    // Do NOT access user info here!
+  }
 
-  async postPfc(email: string, titulo: string, orientador: string, base64Pdf: string): Promise<void> {
-    try {
-      const filePath = `trabalhos/${email}_${Date.now()}.pdf`;
-      const fileRef = ref(this.storage, filePath);
-      await uploadString(fileRef, base64Pdf, 'base64');
-
-      const fileUrl = await getDownloadURL(fileRef);
-
-      const trabalhosRef = collection(this.firestore, 'trabalhos');
-      await addDoc(trabalhosRef, {
-        email,
-        titulo,
-        orientador,
-        fileUrl,
-        createdAt: new Date(),
-      });
-
-    } catch (error) {
-      console.error('Error while posting', error);
-      throw error;
+  async setEmailFromAuth(): Promise<void> {
+    const user = this.authService.currentUserSig();
+    if (user) {
+      this.email = user.email;
     }
+  }
+
+  async addPfc(content: string, title: string, orientator: string) {
+    if (!this.email) {
+      await this.setEmailFromAuth();
+      if (!this.email) throw new Error('User not authenticated.');
+    }
+
+    const pfcRef = collection(this.firestore, 'pfcs');
+    const pfcData: Pfc = {
+      email: this.email,
+      title,
+      orientator,
+      content,
+    };
+    return addDoc(pfcRef, pfcData);
   }
 }

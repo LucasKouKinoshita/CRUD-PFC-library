@@ -1,13 +1,14 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, Signal, signal } from '@angular/core';
 import {
   Auth,
+  authState,
   createUserWithEmailAndPassword,
   reauthenticateWithCredential,
   updatePassword,
   updateProfile,
   user,
 } from '@angular/fire/auth';
-import { EmailAuthProvider, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { EmailAuthProvider, signInWithEmailAndPassword, signOut, User } from 'firebase/auth';
 import { from, Observable } from 'rxjs';
 import { UserInterface } from '../@interfaces/user.interface';
 
@@ -15,11 +16,49 @@ import { UserInterface } from '../@interfaces/user.interface';
   providedIn: 'root',
 })
 export class AuthService {
-  firebaseAuth = inject(Auth);
-  user$ = user(this.firebaseAuth)
-  currentUserSig = signal<UserInterface | null | undefined>(undefined)
+  private _currentUserSig = signal<UserInterface | null>(null);
+  currentUserSig = this._currentUserSig.asReadonly();
 
-  constructor() {}
+  firebaseAuth = inject(Auth);
+  currentUser$: Observable<User | null> = authState(this.firebaseAuth);
+
+  constructor() {
+    authState(this.firebaseAuth).subscribe((user) => {
+      if (user) {
+        this._currentUserSig.set({
+          email: user.email || '',
+          username: user.displayName || '',
+        });
+      } else {
+        this._currentUserSig.set(null);
+      }
+    });
+  }
+
+  login(email: string, password: string): Observable<void> {
+    const promise = signInWithEmailAndPassword(
+      this.firebaseAuth,
+      email,
+      password
+    ).then(() => {
+      const currentUser = this.firebaseAuth.currentUser;
+
+      if (currentUser) {
+        // Set the currentUserSig signal with email and displayName
+        this._currentUserSig.set({
+          email: currentUser.email || '',
+          username: currentUser.displayName || '',
+        });
+      }
+    });
+
+    return from(promise);
+  }
+
+  logout(): Observable<void> {
+    this._currentUserSig.set(null);
+    return from(signOut(this.firebaseAuth));
+  }
 
   register(
     email: string,
@@ -36,33 +75,7 @@ export class AuthService {
 
     return from(promise);
   }
-
-  login(email: string, password: string): Observable<void> {
-    const promise = signInWithEmailAndPassword(
-      this.firebaseAuth,
-      email,
-      password
-    ).then(() => {
-      const currentUser = this.firebaseAuth.currentUser;
-
-      if (currentUser) {
-        // Set the currentUserSig signal with email and displayName
-        this.currentUserSig.set({
-          email: currentUser.email || '',
-          username: currentUser.displayName || '',
-        });
-      }
-    });
-
-    return from(promise);
-  }
-
-  logout(): Observable<void> {
-    const promise = signOut(this.firebaseAuth)
-    this.currentUserSig.set(null);
-    return from(promise)
-  }
-
+  
   changePassword(newPassword: string, currentPassword: string): Observable<void> {
     const user = this.firebaseAuth.currentUser;
 
