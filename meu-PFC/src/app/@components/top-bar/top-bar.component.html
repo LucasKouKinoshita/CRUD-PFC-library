@@ -4,10 +4,11 @@
   @if (authService.currentUserSig()){
   <div class = "flex flex-row gap-2">
     <a class="topbar-link gap-2 align-content-center" routerLink="/profile">Profile</a>
+    <app-pfc-uploader></app-pfc-uploader>
     <p-button
-      label="Logout"
-      icon="pi pi-user-minus"
-      (onClick)="logout()"
+    label="Logout"
+    icon="pi pi-user-minus"
+    (onClick)="logout()"
     />
   </div>
   }
