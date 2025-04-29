@@ -1,15 +1,19 @@
 <nav class="topbar">
   <a class="topbar-logo" routerLink="/home"> meuPFC </a>
   <div class="topbar-spacer"></div>
-  @if (authService.currentUserSig()){
-  <div class = "flex flex-row gap-2">
-    <a class="topbar-link gap-2 align-content-center" routerLink="/profile">Profile</a>
-    <app-pfc-uploader></app-pfc-uploader>
-    <p-button
-    label="Logout"
-    icon="pi pi-user-minus"
-    (onClick)="logout()"
-    />
-  </div>
-  }
+  <ng-container *ngIf="user$ | async as user">
+    <div class="flex flex-row align-items-center gap-2">
+      <a class="topbar-link" routerLink="/profile">Profile</a>
+      <p-button
+      label="Upload"
+      icon="pi pi-upload"
+      [routerLink]="'/upload-pfc'"
+      ></p-button>
+      <p-button
+        label="Logout"
+        icon="pi pi-user-minus"
+        (onClick)="logout()"
+      ></p-button>
+    </div>
+  </ng-container>
 </nav>

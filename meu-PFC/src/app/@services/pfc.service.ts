@@ -6,6 +6,7 @@ export interface Pfc {
   email: string;
   title: string;
   orientator: string;
+  author: string;
   content: string;
 }
 @Injectable({
@@ -18,7 +19,6 @@ export class PfcService {
     private readonly authService: AuthService,
     private readonly firestore: Firestore
   ) {
-    // Do NOT access user info here!
   }
 
   async setEmailFromAuth(): Promise<void> {
@@ -28,7 +28,7 @@ export class PfcService {
     }
   }
 
-  async addPfc(content: string, title: string, orientator: string) {
+  async addPfc(content: string, title: string, orientator: string, author: string) {
     if (!this.email) {
       await this.setEmailFromAuth();
       if (!this.email) throw new Error('User not authenticated.');
@@ -39,6 +39,7 @@ export class PfcService {
       email: this.email,
       title,
       orientator,
+      author,
       content,
     };
     return addDoc(pfcRef, pfcData);

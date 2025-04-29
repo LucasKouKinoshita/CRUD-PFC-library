@@ -12,6 +12,8 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
+import { provideFirestore } from '@angular/fire/firestore';
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyAeEsYZCJ6gv6uywN0ErucqVrSpb7G0GXU",
@@ -26,6 +28,7 @@ const firebaseConfig = {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
 
     provideZoneChangeDetection({ eventCoalescing: true }),
