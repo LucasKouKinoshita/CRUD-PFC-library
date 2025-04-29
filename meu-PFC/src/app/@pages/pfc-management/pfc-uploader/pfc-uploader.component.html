@@ -1,8 +1,50 @@
-<div class="card flex justify-center">
-  
-  <div>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vitae mollitia maxime ipsum dolores impedit tenetur quaerat error magni vel, ipsa laboriosam veniam ex ut eveniet laborum accusamus voluptates? Placeat, a.
+<div class="flex flex-column align-items-center">
+  <div class="card flex flex-column gap-4">
+    <form [formGroup]="form">
+      <div class="flex flex-column gap-4">
+        <p-floatlabel variant="on">
+          <div class="flex flex-column gap-2">
+            <label for="title">Title</label>
+            <input pInputText id="title" type="title" formControlName="title" />
+          </div>
+        </p-floatlabel>
+
+        <p-floatlabel variant="on">
+          <div class="flex flex-column gap-2">
+            <label for="author">Author</label>
+            <input
+              pInputText
+              id="author"
+              type="author"
+              formControlName="author"
+            />
+          </div>
+        </p-floatlabel>
+
+        <p-floatlabel variant="on">
+          <div class="flex flex-column gap-2">
+            <input
+              pInputText
+              id="orientator"
+              type="orientator"
+              formControlName="orientator"
+            />
+            <label for="orientator">Orientator</label>
+          </div>
+        </p-floatlabel>
+      </div>
+    </form>
+
+    <p-fileupload
+      (onUpload)="onPdfSelect($event)"
+      [multiple]="false"
+      accept="application/pdf"
+      maxFileSize="1000000"
+      mode="advanced"
+    >
+      <ng-template #empty>
+        <div>Drag and drop file to here to upload.</div>
+      </ng-template>
+    </p-fileupload>
   </div>
-
 </div>
-
