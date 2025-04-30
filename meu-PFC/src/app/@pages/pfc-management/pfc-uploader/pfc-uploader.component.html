@@ -1,5 +1,10 @@
 <div class="flex flex-column align-items-center">
   <div class="card flex flex-column gap-4">
+
+    <div class = 'text-xl' >
+      Submit work Info
+    </div>
+
     <form [formGroup]="form">
       <div class="flex flex-column gap-4">
         <p-floatlabel variant="on">
@@ -36,15 +41,16 @@
     </form>
 
     <p-fileupload
-      (onUpload)="onPdfSelect($event)"
+      (onSelect)="onPdfSelect($event)"
       [multiple]="false"
-      accept="application/pdf"
-      maxFileSize="1000000"
-      mode="advanced"
+      maxFileSize="1048487"
+      mode="basic"
+      accept=".pdf"
+      chooseLabel="Upload file"
+      chooseIcon="pi pi-upload"
     >
-      <ng-template #empty>
-        <div>Drag and drop file to here to upload.</div>
-      </ng-template>
     </p-fileupload>
+
+    <p-button label="Post work" (onClick)="postWork()"></p-button>
   </div>
 </div>

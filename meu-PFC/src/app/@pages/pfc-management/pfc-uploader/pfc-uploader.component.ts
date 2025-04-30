@@ -43,6 +43,9 @@ export class PfcUploaderComponent implements OnInit {
     });
   }
 
+  file!: File;
+  fileContent: string = '';
+
   ngOnInit(): void {
     this.form = this.fb.nonNullable.group({
       title: ['', [Validators.required, Validators.required]],
@@ -55,25 +58,30 @@ export class PfcUploaderComponent implements OnInit {
     if (!this.form.valid) {
       return;
     }
-    const rawForm = this.form.getRawValue();
-    const file: File = event.files[0];
+    this.file = event.files[0];
+  }
+
+  postWork() {
+    if (!this.form.valid) {
+      return;
+    }
     const reader = new FileReader();
 
     reader.onload = () => {
-      const base64String = (reader.result as string).split(',')[1]; // remove o prefixo "data:application/pdf;base64,"
+      const rawForm = this.form.getRawValue();
+
+      const base64String = (reader.result as string).split(',')[1];
 
       this.pfcService
         .addPfc(base64String, rawForm.title, rawForm.orientator, rawForm.author)
         .then(() => {
-          // Sucesso!
           console.log('Trabalho enviado com sucesso!');
         })
         .catch((err) => {
-          // Erro
           console.error('Erro ao enviar trabalho:', err);
         });
     };
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(this.file);
   }
 }

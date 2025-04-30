@@ -5,6 +5,11 @@
     <div class="flex flex-row align-items-center gap-2">
       <a class="topbar-link" routerLink="/profile">Profile</a>
       <p-button
+      label="Manage PFC"
+      icon="pi pi-book"
+      [routerLink]="'/manage-pfc'"
+      ></p-button>
+      <p-button
       label="Upload"
       icon="pi pi-upload"
       [routerLink]="'/upload-pfc'"
