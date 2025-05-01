@@ -14,8 +14,11 @@ import { DisplayComponent } from '../display/display.component';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit{
-  authService = inject(AuthService);
   router = inject(Router);
+
+  constructor(
+    private readonly authService: AuthService,
+  ){}
 
   ngOnInit(): void {
     if (!this.authService.currentUserSig()) {

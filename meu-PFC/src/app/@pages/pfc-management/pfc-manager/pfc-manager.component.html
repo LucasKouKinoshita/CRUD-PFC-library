@@ -1,46 +1,50 @@
 <div class="flex flex-column align-items-center">
   <div class="card flex flex-column gap-4">
-    <div class="text-xl">Edit work</div>
+    <div class="text-xl">Manage work</div>
 
-    <form [formGroup]="form">
-      <div class="flex flex-column gap-4">
-        <div class="flex flex-column gap-2">
-          <label for="title">New title</label>
-          <input pInputText id="title" type="title" formControlName="title" />
+    <div class="flex flex-column gap-2">
+      <label for="title">Published works</label>
+      <p-select
+        [options]="workList"
+        [(ngModel)]="selectedwork"
+        (onChange)="onWorkSelect()"
+        optionLabel="title"
+        placeholder="Select a work you wish to update"
+        class="w-full md:w-56"
+      />
+    </div>
+    <div class="flex flex-column gap-2">
+      <label for="title">Edit work</label>
+      <form [formGroup]="form" class="subcard">
+        <div class="flex flex-column gap-4">
+          <div class="flex flex-column gap-2">
+            <label for="title">New title</label>
+            <input pInputText id="title" type="title" formControlName="title" />
+          </div>
+
+          <div class="flex flex-column gap-2">
+            <label for="author">New author</label>
+            <input
+              pInputText
+              id="author"
+              type="author"
+              formControlName="author"
+            />
+          </div>
+
+          <div class="flex flex-column gap-2">
+            <label for="orientator">New orientator</label>
+            <input
+              pInputText
+              id="orientator"
+              type="orientator"
+              formControlName="orientator"
+            />
+          </div>
         </div>
+      </form>
+    </div>
 
-        <div class="flex flex-column gap-2">
-          <label for="author">New author</label>
-          <input
-            pInputText
-            id="author"
-            type="author"
-            formControlName="author"
-          />
-        </div>
-
-        <div class="flex flex-column gap-2">
-          <label for="orientator">New orientator</label>
-          <input
-            pInputText
-            id="orientator"
-            type="orientator"
-            formControlName="orientator"
-          />
-        </div>
-      </div>
-    </form>
-
-    <p-fileupload
-      (onSelect)="onPdfSelect($event)"
-      [multiple]="false"
-      maxFileSize="1048487"
-      mode="basic"
-      accept=".pdf"
-      chooseLabel="Upload new file"
-      chooseIcon="pi pi-upload"
-    >
-    </p-fileupload>
     <div class="flex flex-row gap-2">
       <p-button
         label="Update work"
