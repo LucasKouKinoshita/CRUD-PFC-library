@@ -1,0 +1,50 @@
+<div class="flex flex-column align-items-center">
+    <div class="flex flex-column gap-4 card">
+      <p class="text-xl">Enter</p>
+  
+      @if (errorMessage) {
+          <div> {{errorMessage}}</div>
+      }
+  
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="flex flex-column gap-4">
+  
+          <div class="flex flex-column gap-2">
+            <label for="email">E-mail</label>
+            <input pInputText id="email" type="email" formControlName="email" />
+          </div>
+  
+          <div class="flex flex-column gap-2">
+            <label for="password">Password</label>
+            <input
+              pInputText
+              id="password"
+              type="password"
+              formControlName="password"
+            />
+          </div>
+
+          <a routerLink="/change-password">Change password</a>
+  
+          <div class="flex flex-column gap-1">
+            <p-button
+              label="Login"
+              icon="pi pi-user"
+              severity="success"
+              class="w-full max-w-[17.35rem]"
+              styleClass="w-full mx-auto"
+              (onClick)="onSubmit()"
+            />
+            <p-button
+              label="Register"
+              icon="pi pi-user-plus"
+              class="w-full max-w-[17.35rem]"
+              styleClass="w-full mx-auto"
+              [routerLink]="'/register'"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
