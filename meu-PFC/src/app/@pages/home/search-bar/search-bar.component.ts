@@ -21,4 +21,6 @@ import { ButtonModule } from 'primeng/button';
 })
 export class SearchBarComponent {
   inputValue: string = '';
+  tagOptions: string[] = ['Orientator', 'Author', 'Title'];
+
 }
