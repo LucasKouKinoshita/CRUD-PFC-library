@@ -1,10 +1,12 @@
-<div
-  class="container flex flex-column align-items-center justify-content-center"
->
+<div class="container flex flex-column align-items-center justify-content-center">
   <p-floatlabel variant="on" style="width: 50%;">
     <p-inputgroup>
       <p-inputgroup-addon>
-        <p-button icon="pi pi-search" severity="secondary"></p-button>
+        <p-button
+          icon="pi pi-search"
+          severity="secondary"
+          (onClick)="onSearch()"
+        ></p-button>
       </p-inputgroup-addon>
       <input
         pInputText
@@ -13,4 +15,11 @@
       />
     </p-inputgroup>
   </p-floatlabel>
+
+  <div *ngIf="tccs$ | async as tccs" class="mt-4">
+    <div *ngFor="let tcc of tccs">
+      <p><strong>{{ tcc.title }}</strong> - {{ tcc.author }} (Orientador: {{ tcc.orientator }})</p>
+    </div>
+  </div>
 </div>
+
