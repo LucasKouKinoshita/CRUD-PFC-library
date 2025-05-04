@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { InputTextModule } from 'primeng/inputtext';
@@ -6,7 +6,8 @@ import { FloatLabel } from 'primeng/floatlabel';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { ButtonModule } from 'primeng/button';
-import { Firestore, collection, collectionData, query, where } from '@angular/fire/firestore';
+import { DropdownModule } from 'primeng/dropdown';
+import { SearchBarService } from '../../../@services/search-bar.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -20,28 +21,25 @@ import { Observable } from 'rxjs';
     InputGroupModule,
     InputGroupAddonModule,
     ButtonModule,
+    DropdownModule,
   ],
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.css'],
 })
 export class SearchBarComponent {
   inputValue: string = '';
-  tagOptions: string[] = ['Orientator', 'Author', 'Title'];
-  selectedTag: string = 'Title'; // Pode ser alterado dinamicamente no futuro
+  selectedTag: string = 'title';
   tccs$: Observable<any[]> | undefined;
 
-  constructor(private firestore: Firestore) {}
+  tagOptions = [
+    { label: 'Title', value: 'title' },
+    { label: 'Author', value: 'author' },
+    { label: 'Orientator', value: 'orientator' },
+  ];
 
-  onSearch() {
-    const searchField = this.selectedTag.toLowerCase();
-    const tccCollection = collection(this.firestore, 'tccs');
+  constructor(private searchBarService: SearchBarService) {}
 
-    const q = query(
-      tccCollection,
-      where(searchField, '>=', this.inputValue),
-      where(searchField, '<=', this.inputValue + '\uf8ff')
-    );
-
-    this.tccs$ = collectionData(q, { idField: 'id' });
+  onSearch(): void {
+    this.tccs$ = this.searchBarService.searchTccs(this.selectedTag, this.inputValue);
   }
 }
