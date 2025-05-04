@@ -27,5 +27,21 @@ import { Observable } from 'rxjs';
 export class SearchBarComponent {
   inputValue: string = '';
   tagOptions: string[] = ['Orientator', 'Author', 'Title'];
+  selectedTag: string = 'Title'; // Pode ser alterado dinamicamente no futuro
+  tccs$: Observable<any[]> | undefined;
 
+  constructor(private firestore: Firestore) {}
+
+  onSearch() {
+    const searchField = this.selectedTag.toLowerCase();
+    const tccCollection = collection(this.firestore, 'tccs');
+
+    const q = query(
+      tccCollection,
+      where(searchField, '>=', this.inputValue),
+      where(searchField, '<=', this.inputValue + '\uf8ff')
+    );
+
+    this.tccs$ = collectionData(q, { idField: 'id' });
+  }
 }
