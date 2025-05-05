@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PfcService } from '../../../@services/pfc.service';
-import { SearchStateService } from '../../../@services/search-state.service';
-import { SearchBarService } from '../../../@services/search-bar.service';
 import { DocumentData } from 'firebase/firestore';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
+import { SearchStateService } from '../../../@services/search-state.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-display',
@@ -16,34 +16,38 @@ import { ButtonModule } from 'primeng/button';
   styleUrl: './display.component.css',
 })
 export class DisplayComponent implements OnInit {
-  workList!: (DocumentData & { id?: string })[];
+  workList: (DocumentData & { id?: string })[] = [];
+  allWorks: (DocumentData & { id?: string })[] = [];
+  private searchSub!: Subscription;
 
   constructor(
     private readonly pfcService: PfcService,
-    private readonly searchState: SearchStateService,
-    private readonly searchBarService: SearchBarService
+    private readonly searchStateService: SearchStateService
   ) {}
 
   ngOnInit(): void {
-    // Escuta atualizações do campo de pesquisa
-    this.searchState.searchTerm$.subscribe((search) => {
-      if (search && search.term) {
-        this.searchBarService.searchTccs(search.field, search.term).subscribe(data => {
-          this.workList = data;
-        });
-      } else {
-        this.loadAll();
-      }
+    this.pfcService.getPfcs().subscribe(data => {
+      this.allWorks = data;
+      this.workList = [...this.allWorks];
     });
 
-    // Carrega tudo inicialmente
-    this.loadAll();
+    this.searchSub = this.searchStateService.searchTerm$.subscribe(term => {
+      if (!term || term.term === '') {
+        this.workList = [...this.allWorks];
+        return;
+      }
+
+      const filtered = this.allWorks.filter(work => {
+        const value = (work[term.field] || '').toLowerCase();
+        return value.includes(term.term);
+      });
+
+      this.workList = filtered;
+    });
   }
 
-  loadAll() {
-    this.pfcService.getPfcs().subscribe(data => {
-      this.workList = data;
-    });
+  ngOnDestroy(): void {
+    this.searchSub?.unsubscribe();
   }
 
   viewPdf(base64Content: string) {
