@@ -19,6 +19,7 @@ export interface Pfc {
   orientator: string;
   author: string;
   content: string;
+  orientatorReview: string;
 }
 
 @Injectable({
@@ -40,7 +41,7 @@ export class PfcService {
     }
   }
 
-  async addPfc(content: string, title: string, orientator: string, author: string) {
+  async addPfc(content: string, title: string, orientator: string, author: string, orientatorReview: string) {
     if (!this.email) {
       await this.setEmailFromAuth();
       if (!this.email) throw new Error('User not authenticated.');
@@ -53,6 +54,7 @@ export class PfcService {
       orientator,
       author,
       content,
+      orientatorReview
     };
     await addDoc(pfcRef, pfcData);
   }

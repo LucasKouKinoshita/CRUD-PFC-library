@@ -21,6 +21,9 @@
           <ng-template #subtitle>
             {{ work['author'] || 'Unknown' }} <br />
             <small>Orientator: {{ work['orientator'] || 'Not informed' }}</small>
+            <div>
+              <small>Orientator Review: {{ work['orientatorReview'] || 'Not informed' }}</small>
+            </div>
           </ng-template>
       
           <ng-template #footer>

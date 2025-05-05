@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { PopoverModule } from 'primeng/popover';
 import { FileUploadModule } from 'primeng/fileupload';
-import { FloatLabel } from 'primeng/floatlabel';
 import { PfcService } from '../../../@services/pfc.service';
 import {
   FormBuilder,
@@ -22,7 +21,6 @@ import { CommonModule } from '@angular/common';
     PopoverModule,
     FileUploadModule,
     ReactiveFormsModule,
-    FloatLabel,
     CommonModule,
     FormsModule,
   ],
@@ -51,6 +49,7 @@ export class PfcUploaderComponent implements OnInit {
       title: ['', [Validators.required, Validators.required]],
       author: ['', [Validators.required, Validators.required]],
       orientator: ['', [Validators.required, Validators.required]],
+      orientatorReview: ['', [Validators.required, Validators.required]],
     });
   }
 
@@ -73,7 +72,7 @@ export class PfcUploaderComponent implements OnInit {
       const base64String = (reader.result as string).split(',')[1];
 
       this.pfcService
-        .addPfc(base64String, rawForm.title, rawForm.orientator, rawForm.author)
+        .addPfc(base64String, rawForm.title, rawForm.orientator, rawForm.author, rawForm.orientatorReview)
         .then(() => {
           console.log('Trabalho enviado com sucesso!');
         })
