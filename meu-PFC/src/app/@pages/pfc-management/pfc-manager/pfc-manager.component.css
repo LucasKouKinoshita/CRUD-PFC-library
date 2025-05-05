@@ -1,0 +1,19 @@
+.card {
+    width: auto;
+    background-color: rgba(33,31,31,255);
+    border: 1px;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 3rem;
+    border-radius: 4px;
+    margin-top: 10rem;
+}
+
+.subcard {
+    width: auto;
+    background-color: rgba(0, 0, 0, 0.7);;
+    border: 1px;
+    padding: 1.25rem;
+    border-radius: 8px;
+}
