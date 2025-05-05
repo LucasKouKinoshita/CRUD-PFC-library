@@ -1,7 +1,7 @@
 <div class="container flex flex-column align-items-center justify-content-center gap-3">
   <p-select
     [options]="tagOptions" 
-    [(ngModel)]="selectedTag"
+    [(ngModel)]="selectedField" 
     placeholder="Select field"
     styleClass="w-12rem"
   ></p-select>
@@ -9,13 +9,18 @@
   <p-floatlabel variant="on" style="width: 50%;">
     <p-inputgroup>
       <p-inputgroup-addon>
-        <p-button icon="pi pi-search" severity="secondary" (onClick)="onSearchClick()"></p-button>
+        <p-button icon="pi pi-search" severity="secondary" (onClick)="onSearch()"></p-button>
       </p-inputgroup-addon>
       <input
         pInputText
         [(ngModel)]="inputValue"
         placeholder="Search"
       />
+      <p-inputgroup-addon>
+        <p-button icon="pi pi-times" severity="danger" (onClick)="clearSearch()" />
+      </p-inputgroup-addon>
     </p-inputgroup>
   </p-floatlabel>
 </div>
+
+

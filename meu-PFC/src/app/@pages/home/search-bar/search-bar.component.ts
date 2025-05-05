@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabel } from 'primeng/floatlabel';
-import { FormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { ButtonModule } from 'primeng/button';
 import { SelectModule } from 'primeng/select';
-import { SearchStateService } from '../../../@services/search-state.service';
 import { CommonModule } from '@angular/common';
+import { SearchStateService } from '../../../@services/search-state.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -27,12 +27,24 @@ import { CommonModule } from '@angular/common';
 })
 export class SearchBarComponent {
   inputValue: string = '';
-  selectedTag: string = 'Title';
-  tagOptions: string[] = ['Orientator', 'Author', 'Title'];
+  selectedField: string = 'title'; // valor padrão
 
-  constructor(private searchState: SearchStateService) {}
+  tagOptions = [
+    { label: 'Title', value: 'title' },
+    { label: 'Author', value: 'author' },
+    { label: 'Orientator', value: 'orientator' },
+  ];
 
-  onSearchClick() {
-    this.searchState.setSearchTerm(this.inputValue.trim(), this.selectedTag.toLowerCase());
+  constructor(private searchStateService: SearchStateService) {}
+
+  onSearch() {
+    if (this.inputValue.trim()) {
+      this.searchStateService.setSearchTerm(this.inputValue, this.selectedField);
+    }
+  }
+
+  clearSearch() {
+    this.inputValue = '';
+    this.searchStateService.clearSearch();
   }
 }
