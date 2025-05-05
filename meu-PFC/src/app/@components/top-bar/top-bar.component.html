@@ -1,7 +1,7 @@
 <nav class="topbar">
   <a class="topbar-logo" routerLink="/home"> meuPFC </a>
   <div class="topbar-spacer"></div>
-  <ng-container *ngIf="user$ | async as user">
+  <ng-container *ngIf="user != undefined">
     <div class="flex flex-row align-items-center gap-2">
       <a class="topbar-link" routerLink="/profile">Profile</a>
       <p-button

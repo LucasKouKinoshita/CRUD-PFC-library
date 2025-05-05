@@ -9,7 +9,7 @@ import {
   user,
 } from '@angular/fire/auth';
 import { EmailAuthProvider, signInWithEmailAndPassword, signOut, User } from 'firebase/auth';
-import { from, Observable } from 'rxjs';
+import { from, map, Observable } from 'rxjs';
 import { UserInterface } from '../@interfaces/user.interface';
 
 @Injectable({
@@ -96,5 +96,18 @@ export class AuthService {
     return new Observable<void>((observer) => {
       observer.error('No user is signed in.');
     });
+  }
+
+  getUser(): Observable<UserInterface | null> {
+    return this.currentUser$.pipe(
+      map(user => {
+        return user
+          ? {
+              email: user.email || '',
+              username: user.displayName || '',
+            }
+          : null;
+      })
+    );
   }
 }
