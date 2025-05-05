@@ -9,7 +9,7 @@ export class SearchBarService {
   constructor(private firestore: Firestore) {}
 
   searchTccs(field: string, value: string): Observable<any[]> {
-    const tccCollection = collection(this.firestore, 'tccs');
+    const tccCollection = collection(this.firestore, 'pfcs');
 
     const q = query(
       tccCollection,

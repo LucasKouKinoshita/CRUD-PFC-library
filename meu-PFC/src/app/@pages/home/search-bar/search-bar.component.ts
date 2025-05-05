@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { ButtonModule } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
+import { SelectModule } from 'primeng/select';
 import { SearchStateService } from '../../../@services/search-state.service';
 import { CommonModule } from '@angular/common';
 
@@ -20,7 +20,7 @@ import { CommonModule } from '@angular/common';
     InputGroupModule,
     InputGroupAddonModule,
     ButtonModule,
-    DropdownModule
+    SelectModule
   ],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.css',
