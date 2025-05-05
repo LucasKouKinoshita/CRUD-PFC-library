@@ -1,33 +1,21 @@
-<div class="container flex flex-column align-items-center justify-content-center gap-2">
-  <div class="flex flex-row gap-2 align-items-center">
-    <p-dropdown
-      [options]="tagOptions"
-      [(ngModel)]="selectedTag"
-      placeholder="Select field"
-      styleClass="w-12rem"
-    ></p-dropdown>
+<div class="container flex flex-column align-items-center justify-content-center gap-3">
+  <p-dropdown 
+    [options]="tagOptions" 
+    [(ngModel)]="selectedTag"
+    placeholder="Select field"
+    styleClass="w-12rem"
+  ></p-dropdown>
 
-    <p-floatlabel variant="on" style="width: 20rem">
-      <p-inputgroup>
-        <p-inputgroup-addon>
-          <p-button
-            icon="pi pi-search"
-            severity="secondary"
-            (onClick)="onSearch()"
-          ></p-button>
-        </p-inputgroup-addon>
-        <input
-          pInputText
-          [(ngModel)]="inputValue"
-          placeholder="Search"
-        />
-      </p-inputgroup>
-    </p-floatlabel>
-  </div>
-
-  <div *ngIf="tccs$ | async as tccs" class="mt-4">
-    <div *ngFor="let tcc of tccs">
-      <p><strong>{{ tcc.title }}</strong> - {{ tcc.author }} (Orientador: {{ tcc.orientator }})</p>
-    </div>
-  </div>
+  <p-floatlabel variant="on" style="width: 50%;">
+    <p-inputgroup>
+      <p-inputgroup-addon>
+        <p-button icon="pi pi-search" severity="secondary" (onClick)="onSearchClick()"></p-button>
+      </p-inputgroup-addon>
+      <input
+        pInputText
+        [(ngModel)]="inputValue"
+        placeholder="Search"
+      />
+    </p-inputgroup>
+  </p-floatlabel>
 </div>
