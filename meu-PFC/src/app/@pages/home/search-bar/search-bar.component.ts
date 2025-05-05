@@ -42,4 +42,9 @@ export class SearchBarComponent {
       this.searchStateService.setSearchTerm(this.inputValue, this.selectedField);
     }
   }
+
+  clearSearch() {
+    this.inputValue = '';
+    this.searchStateService.clearSearch();
+  }
 }

@@ -16,6 +16,9 @@
         [(ngModel)]="inputValue"
         placeholder="Search"
       />
+      <p-inputgroup-addon>
+        <p-button icon="pi pi-times" severity="danger" (onClick)="clearSearch()" />
+      </p-inputgroup-addon>
     </p-inputgroup>
   </p-floatlabel>
 </div>

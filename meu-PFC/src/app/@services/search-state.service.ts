@@ -24,7 +24,8 @@ export class SearchStateService {
   }
 
   // Reseta a busca (opcional, se quiser limpar filtros)
-  clearSearchTerm() {
+  clearSearch() {
     this.searchTermSubject.next(null);
   }
+  
 }
