@@ -7,14 +7,11 @@
 
     <form [formGroup]="form">
       <div class="flex flex-column gap-4">
-        <p-floatlabel variant="on">
           <div class="flex flex-column gap-2">
             <label for="title">Title</label>
             <input pInputText id="title" type="title" formControlName="title" />
           </div>
-        </p-floatlabel>
 
-        <p-floatlabel variant="on">
           <div class="flex flex-column gap-2">
             <label for="author">Author</label>
             <input
@@ -24,19 +21,26 @@
               formControlName="author"
             />
           </div>
-        </p-floatlabel>
 
-        <p-floatlabel variant="on">
           <div class="flex flex-column gap-2">
+            <label for="orientator">Orientator</label>
             <input
               pInputText
               id="orientator"
               type="orientator"
               formControlName="orientator"
             />
-            <label for="orientator">Orientator</label>
           </div>
-        </p-floatlabel>
+
+          <div class="flex flex-column gap-2">
+            <label for="orientator">Orientator review</label>
+            <input
+              pInputText
+              id="orientatorReview"
+              type="text"
+              formControlName="orientatorReview"
+            />
+          </div>
       </div>
     </form>
 
