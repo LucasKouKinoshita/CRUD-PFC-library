@@ -1,9 +1,7 @@
-import { Component, inject, OnInit, Signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../@services/auth.service';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { User } from 'firebase/auth';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserInterface } from '../../@interfaces/user.interface';
@@ -18,10 +16,10 @@ import { UserInterface } from '../../@interfaces/user.interface';
     CommonModule,
   ],
   templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.css'], // <-- Fix here too
+  styleUrls: ['./top-bar.component.css'],
 })
-export class TopBarComponent implements OnInit{
-  user!: UserInterface | undefined
+export class TopBarComponent implements OnInit {
+  user: UserInterface | null = null;
 
   constructor(
     private readonly authService: AuthService,
@@ -30,12 +28,8 @@ export class TopBarComponent implements OnInit{
 
   ngOnInit(): void {
     this.authService.getUser().subscribe(user => {
-      if (user) {
-        this.user = user
-        console.log('User is logged in:', user);
-      } else {
-        this.user = undefined
-      }
+      this.user = user;
+      console.log('Usuário logado:', user);
     });
   }
 
