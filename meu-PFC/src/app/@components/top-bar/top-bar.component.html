@@ -1,9 +1,13 @@
 <nav class="topbar">
   <a class="topbar-logo" routerLink="/home"> meuPFC </a>
   <div class="topbar-spacer"></div>
-  <ng-container *ngIf="user != undefined">
+  <ng-container *ngIf="user">
     <div class="flex flex-row align-items-center gap-2">
-      <a class="topbar-link" routerLink="/profile">Profile</a>
+      <p-button
+      label="Profile"
+      icon="pi pi-user"
+      [routerLink]="'/profile'"
+      ></p-button>
       <p-button
       label="Manage PFC"
       icon="pi pi-book"
