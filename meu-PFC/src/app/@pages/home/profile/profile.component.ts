@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Observable, of, switchMap } from 'rxjs';
-import { ProfileService, User } from '../../../@services/profile.service';
 import { CardModule } from 'primeng/card';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
-import { Auth, authState } from '@angular/fire/auth';
-import { User as FirebaseUser } from 'firebase/auth';
+import { AuthService } from '../../../@services/auth.service';
+import { UserInterface } from '../../../@interfaces/user.interface';
+import { PfcService } from '../../../@services/pfc.service';
+import { DocumentData } from 'firebase/firestore';
 
 @Component({
   selector: 'app-profile',
@@ -21,21 +22,31 @@ import { User as FirebaseUser } from 'firebase/auth';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  user$!: Observable<User | null>;
-
+  user: UserInterface | null = null;
+  workList: (DocumentData & { id?: string })[] = [];
+  allWorks: (DocumentData & { id?: string })[] = [];
   constructor(
-    private profileService: ProfileService,
-    private firebaseAuth: Auth
+    private authService: AuthService,
+    private pfcService : PfcService
   ) {}
 
   ngOnInit(): void {
-    this.user$ = authState(this.firebaseAuth).pipe(
-      switchMap((user: FirebaseUser | null) => {
-        if (user?.uid) {
-          return this.profileService.getProfile(user.uid);
-        }
-        return of(null);
-      })
-    );
+    this.authService.getUser().subscribe(user => {
+      if (user) {
+        this.user = user
+        console.log('User is logged in:', user);
+      } else {
+        this.user = null
+      }
+    });
+    this.pfcService.getPfcs().subscribe(data => {
+    this.allWorks = data;
+    // Filtrar apenas os PFCs que têm o e-mail do usuário
+    const userEmail = this.user?.email?.toLowerCase() ?? '';
+    this.workList = this.allWorks.filter(work => {
+    const workEmail = (work['email'] || '').toLowerCase();
+    return workEmail === userEmail;
+    });
+});
   }
 }
