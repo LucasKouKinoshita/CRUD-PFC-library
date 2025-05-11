@@ -1,0 +1,32 @@
+<ng-container *ngIf="user$ | async as user; else loading">
+  <div class="flex align-items-center justify-content-center min-h-screen">
+    <p-card class="w-full md:w-6 bg-dark text-white border-round-lg shadow-5 p-4">
+      <div class="text-2xl font-bold mb-3 flex align-items-center gap-2">
+        <i class="pi pi-user text-green-400 text-xl"></i>
+        Meu Perfil
+      </div>
+
+      <div class="grid mb-3">
+        <div class="col-12 md:col-4 font-medium flex align-items-center gap-2">
+          <i class="pi pi-id-card text-green-300"></i> UID:
+        </div>
+        <div class="col-12 md:col-8 text-right white-space-normal">
+          {{ user.uid }}
+        </div>
+      </div>
+
+      <div class="grid mb-3">
+        <div class="col-12 md:col-4 font-medium flex align-items-center gap-2">
+          <i class="pi pi-envelope text-blue-400"></i> E-mail:
+        </div>
+        <div class="col-12 md:col-8 text-right white-space-normal">
+          {{ user.email }}
+        </div>
+      </div>
+    </p-card>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <div class="text-white text-center mt-5">Carregando perfil...</div>
+</ng-template>
