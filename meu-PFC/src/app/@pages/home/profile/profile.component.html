@@ -1,13 +1,16 @@
 <div class="flex align-items-center justify-content-center min-h-screen">
-  <p-card *ngIf="user" class="w-full md:w-6 bg-dark text-white border-round-lg shadow-5 p-4">
+  <p-card
+    *ngIf="user"
+    class="w-full md:w-6 bg-dark text-white border-round-lg shadow-5 p-4"
+  >
     <div class="text-2xl font-bold mb-4 flex align-items-center gap-2">
       <i class="pi pi-user text-green-400 text-xl"></i>
-      Meu Perfil
+      Profile
     </div>
 
     <div class="grid mb-3" *ngIf="user.username">
       <div class="col-12 md:col-4 font-medium flex align-items-center gap-2">
-        <i class="pi pi-heart-fill text-pink-500"></i> Nome:
+        <i class="pi pi-heart-fill text-pink-500"></i> Name:
       </div>
       <div class="col-12 md:col-8 text-right">
         {{ user.username }}
@@ -25,18 +28,14 @@
 
     <div class="grid mb-3" *ngIf="user.email">
       <div class="col-12 md:col-4 font-medium flex align-items-center gap-2">
-        <i class="pi pi-envelope text-blue-400"></i> PFC:
+        <i class="pi pi-envelope text-blue-400"></i> Published works:
       </div>
       <div class="col-12 md:col-8 text-right">
-        <div 
-      *ngFor="let work of workList" 
->
-
-<div>
-            {{ work['title'] || 'No title' }}
+        <div *ngFor="let work of workList">
+          <div>
+            {{ work["title"] || "No title" }}
           </div>
-
-        </div>    
+        </div>
       </div>
     </div>
   </p-card>
