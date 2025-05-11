@@ -12,6 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pfc-uploader',
@@ -32,7 +33,8 @@ export class PfcUploaderComponent implements OnInit {
 
   constructor(
     private readonly pfcService: PfcService,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly router: Router
   ) {
     this.form = new FormGroup({
       title: new FormControl(),
@@ -75,6 +77,7 @@ export class PfcUploaderComponent implements OnInit {
         .addPfc(base64String, rawForm.title, rawForm.orientator, rawForm.author, rawForm.orientatorReview)
         .then(() => {
           console.log('Trabalho enviado com sucesso!');
+          this.router.navigateByUrl('/home');
         })
         .catch((err) => {
           console.error('Erro ao enviar trabalho:', err);
