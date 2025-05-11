@@ -26,22 +26,20 @@ export class LoginComponent implements OnInit{
     })
   }
 
-  ngOninit(): void {
+  ngOnInit(): void {
     this.form = this.fb.nonNullable.group({
       email: ['', [Validators.required, Validators.required]],
       password: ['', [Validators.required, Validators.required]],
     });
+    if(this.authService.currentUserSig()){
+        this.router.navigateByUrl('/home');
+    }
   }
 
   errorMessage: string | null = null;
 
-  ngOnInit(): void {
-      if(this.authService.currentUserSig()){
-        this.router.navigateByUrl('/home');
-      }
-  }
-
   onSubmit(): void {
+    console.log('test')
     if (this.form.valid) {
       const rawForm = this.form.getRawValue();
       this.authService
