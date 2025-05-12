@@ -39,6 +39,6 @@ Com o objetivo de auxiliar alunos da gradução, o trabalho busca implementar um
   - Interface amigável com design semelhante à netflix
 
 ## Project's class diagram
-  ![image](https://github.com/user-attachments/assets/58320567-071c-42c9-841a-40f2ba56fad5)
+![image](https://github.com/user-attachments/assets/afb37182-ecaf-4022-bc96-9cf92bbb87c3)
 
   
