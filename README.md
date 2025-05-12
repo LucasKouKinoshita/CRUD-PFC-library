@@ -34,7 +34,7 @@ Com o objetivo de auxiliar alunos da gradução, o trabalho busca implementar um
       - Título
       - Professor orientador
       - Autor
-  - Os usuário devem poder visualizar e baixar os trabalhos de interesse
+  - Os usuário devem poder visualizar os trabalhos de interesse
 ## Design
   - Interface amigável com design semelhante à netflix
 
