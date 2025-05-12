@@ -8,10 +8,17 @@ Com o objetivo de auxiliar alunos da gradução, o trabalho busca implementar um
 - Filipe Ribeiro - Full stack
 
 ## Stack:
-- Front-end
-  - Angular v19
-- Back-end
-  - Firebase 
+**Frontend**  
+- TypeScript  
+- Angular v19  
+
+**Backend**  
+- Firebase (Authentication, Firestore)
+
+**Others**  
+- Git  
+- GitHub
+  
 ## Features (Historias):
 - Como usuário quero ser capaz de me autenticar no aplicativo
   - Autenticação
@@ -30,4 +37,8 @@ Com o objetivo de auxiliar alunos da gradução, o trabalho busca implementar um
   - Os usuário devem poder visualizar e baixar os trabalhos de interesse
 ## Design
   - Interface amigável com design semelhante à netflix
+
+## Project's class diagram
+  ![image](https://github.com/user-attachments/assets/58320567-071c-42c9-841a-40f2ba56fad5)
+
   
